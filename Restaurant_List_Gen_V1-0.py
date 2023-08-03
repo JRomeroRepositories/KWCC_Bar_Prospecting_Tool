@@ -3,11 +3,13 @@ import googlemaps # pip install googlemaps
 import pandas as pd # pip install pandas
 import re
 
-## Google API Key is unique to all google API platform users,
-##    the key below belongs to the author of this script.
+## Google API Key is unique to all google API platform users, and is used in
+##  reference to the GCP account and billing
 API_KEY = 'KEY NEEDED'
 map_client = googlemaps.Client(API_KEY)
 
+## List of search queries, inteded to encompass all terms that may be used to reference a particular
+##  restaurant or bar.
 search_strings = ['bar', 'restaurant', 'pub', 'nightclub', 'tavern', 'bistro', 'cafe',
                   'eatery', 'lounge', 'public house', 'drinkery', 'taphouse', 'grill', 
                   'brewery', 'beer', 'alehouse', 'establishment'] ## list of search queries
@@ -15,6 +17,8 @@ search_strings = ['bar', 'restaurant', 'pub', 'nightclub', 'tavern', 'bistro', '
 radius = 3 * 1000 # Radius in km
 business_list = []
 
+
+## Main Data-building loop.
 for search_string in search_strings:
     response = map_client.places_nearby(
         location=(43.65162067487806, -79.47599887066528), ## Set to Runnymede station in Toronto
