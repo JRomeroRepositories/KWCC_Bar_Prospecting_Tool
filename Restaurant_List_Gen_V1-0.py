@@ -27,7 +27,7 @@ for search_string in search_strings:
         min_price=1,
         max_price=4
     )
-
+    ## Building the data by appending all attributes with some relevance to alcoholic beverage sales
     for place in response['results']:
         place_details = map_client.place(
             place_id=place['place_id'],
@@ -51,9 +51,10 @@ for search_string in search_strings:
         )
         if place_details['result']['business_status'] == 'OPERATIONAL': ## No filtering by serves_beer
             business_list.append(place_details['result'])
-        # if 'serves_beer' in place_details['result']: ## Filter by serves_beer and operational
-        #     if place_details['result']['serves_beer'] == True and place_details['result']['business_status'] == 'OPERATIONAL':
-        #         business_list.append(place_details['result'])
+        ## Below it the optional 'serves_beer' filter
+        if 'serves_beer' in place_details['result']: ## Filter by serves_beer and operational
+           if place_details['result']['serves_beer'] == True and place_details['result']['business_status'] == 'OPERATIONAL':
+               business_list.append(place_details['result'])
 
 ## Extract top 3 reviews and put them into separate columns
 def extract_reviews(reviews):
@@ -90,4 +91,4 @@ else:
     df[['review_1', 'review_2', 'review_3']] = df['reviews'].apply(lambda x: pd.Series(extract_reviews(x)))
     df['weekday_text'] = df['opening_hours'].apply(lambda x: extract_weekday_text(x) if x else '')
     df = df.drop(columns=['reviews', 'opening_hours'])
-    df.to_excel('Runnymede_Station_3km.xlsx', index=False)
+    df.to_excel('EXCEL_TITLE HERE.xlsx', index=False)
