@@ -9,7 +9,7 @@ import re
 
 ## Google API Key is unique to all google API platform users, and is used in
 ##  reference to the GCP account and billing
-API_KEY = 'AIzaSyBU1fKkdxcm8yuJzjX1OX6dBndeK3QgT0U'
+API_KEY = 'API KEY INSERT HERE'
 map_client = googlemaps.Client(API_KEY)
 
 ## List of search queries, inteded to encompass all terms that may be used to reference a particular
